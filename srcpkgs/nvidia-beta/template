@@ -1,11 +1,11 @@
-# Template file for 'nvidia'
+# Template file for 'nvidia-beta'
 
-_desc="NVIDIA drivers for linux"
+_desc="NVIDIA beta drivers for linux"
 
 pkgname=nvidia-beta
 version=550.40.07
 revision=1
-maintainer="Andrew Benson <abenson+void@gmail.com>"
+maintainer="hostsys <hostsys.dev@gmail.com>"
 license="custom:NVIDIA Proprietary"
 homepage="https://www.nvidia.com/en-us/drivers/unix/"
 
@@ -54,7 +54,7 @@ _install_libs() {
 	vinstall libGLESv2_nvidia.so.${version} 755 ${libdir}
 	ln -sf libGLESv2_nvidia.so.${version} ${DESTDIR}/${libdir}/libGLESv2_nvidia.so.2
 
-	# libnvidia-gpucomp
+	# CUDA compute library
 	vinstall libnvidia-gpucomp.so.${version} 755 ${libdir}
 	ln -sf libnvidia-gpucomp.so.${version} \
 		${DESTDIR}/${libdir}/libnvidia-gpucomp.so.1
