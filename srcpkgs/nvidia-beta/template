@@ -25,8 +25,7 @@ subpackages="nvidia-beta-gtklibs nvidia-beta-dkms nvidia-beta-firmware nvidia-be
 depends="nvidia-beta-libs-${version}_${revision}
  nvidia-beta-gtklibs-${version}_${revision}
  nvidia-beta-dkms-${version}_${revision}
- nvidia-beta-firmware-${version}_${revision}
- libcrypto1.1"
+ nvidia-beta-firmware-${version}_${revision}"
 
 _install_libs() {
 	local libdir=$1
