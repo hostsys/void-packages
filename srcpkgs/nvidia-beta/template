@@ -25,7 +25,8 @@ subpackages="nvidia-beta-gtklibs nvidia-beta-dkms nvidia-beta-firmware nvidia-be
 depends="nvidia-beta-libs-${version}_${revision}
  nvidia-beta-gtklibs-${version}_${revision}
  nvidia-beta-dkms-${version}_${revision}
- nvidia-beta-firmware-${version}_${revision}"
+ nvidia-beta-firmware-${version}_${revision}
+ libcrypto1.1"
 
 _install_libs() {
 	local libdir=$1
@@ -53,13 +54,6 @@ _install_libs() {
 
 	vinstall libGLESv2_nvidia.so.${version} 755 ${libdir}
 	ln -sf libGLESv2_nvidia.so.${version} ${DESTDIR}/${libdir}/libGLESv2_nvidia.so.2
-
-	# CUDA compute library
-	vinstall libnvidia-gpucomp.so.${version} 755 ${libdir}
-	ln -sf libnvidia-gpucomp.so.${version} \
-		${DESTDIR}/${libdir}/libnvidia-gpucomp.so.1
-	ln -sf libnvidia-gpucomp.so.1 \
-		${DESTDIR}/${libdir}/libnvidia-gpucomp.so
 
 	# Thread Local Storage
 	vinstall libnvidia-tls.so.${version} 755 ${libdir}
@@ -107,6 +101,13 @@ _install_libs() {
 		${DESTDIR}/${libdir}/libnvidia-allocator.so.1
 	ln -sf libnvidia-allocator.so.1 \
 		${DESTDIR}/${libdir}/libnvidia-allocator.so
+
+	vinstall libnvidia-gpucomp.so.${version} 755 ${libdir}
+	ln -sf libnvidia-gpucomp.so.${version} \
+		${DESTDIR}/${libdir}/libnvidia-gpucomp.so.1
+	ln -sf libnvidia-gpucomp.so.1 \
+		${DESTDIR}/${libdir}/libnvidia-gpucomp.so
+
 }
 
 do_extract() {
@@ -127,6 +128,11 @@ do_install() {
 	for fw in gsp_ga10x.bin gsp_tu10x.bin; do
 		vinstall "firmware/${fw}" 644 "usr/lib/firmware/nvidia/${version}"
 	done
+
+	# crypto
+	vinstall libnvidia-pkcs11-openssl3.so.${version} 755 usr/lib
+	ln -sf libnvidia-pkcs11-openssl3.so.${version} ${DESTDIR}/usr/lib/libnvidia-pkcs11-openssl3.so
+	ln -sf libnvidia-pkcs11-openssl3.so.${version} ${DESTDIR}/usr/lib/libnvidia-pkcs11-openssl3.so.1
 
 	# GLX extension module for X
 	vinstall libglxserver_nvidia.so.${version} 755 usr/lib/nvidia/xorg
