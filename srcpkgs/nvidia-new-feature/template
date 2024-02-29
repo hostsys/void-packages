@@ -1,10 +1,10 @@
-# Template file for 'nvidia-beta'
+# Template file for 'nvidia-new-feature'
 
-_desc="NVIDIA beta drivers for linux"
+_desc="NVIDIA new feature branch drivers for linux"
 
-pkgname=nvidia-beta
-version=550.40.07
-revision=2
+pkgname=nvidia-new-feature
+version=550.54.14
+revision=1
 maintainer="hostsys <hostsys.dev@gmail.com>"
 license="custom:NVIDIA Proprietary"
 homepage="https://www.nvidia.com/en-us/drivers/unix/"
@@ -15,17 +15,17 @@ repository="nonfree"
 create_wrksrc=yes
 short_desc="${_desc} - Libraries and Utilities"
 hostmakedepends="tar"
-conflicts="xserver-abi-video>25_1 nvidia470>=0 nvidia390>=0 nvidia>=0 nvidia-new-feature>=0"
+conflicts="xserver-abi-video>25_1 nvidia470>=0 nvidia390>=0 nvidia>=0 nvidia-beta>=0"
 
 _pkg="NVIDIA-Linux-x86_64-${version}"
 distfiles="http://uk.download.nvidia.com/XFree86/Linux-x86_64/${version}/${_pkg}.run"
-checksum=298936c727b7eefed95bb87eb8d24cfeef1f35fecac864d98e2694d37749a4ad
+checksum=8c497ff1cfc7c310fb875149bc30faa4fd26d2237b2cba6cd2e8b0780157cfe3
 # subpackages need to be processed in this specific order
-subpackages="nvidia-beta-gtklibs nvidia-beta-dkms nvidia-beta-firmware nvidia-beta-opencl nvidia-beta-libs nvidia-beta-libs-32bit"
-depends="nvidia-beta-libs-${version}_${revision}
- nvidia-beta-gtklibs-${version}_${revision}
- nvidia-beta-dkms-${version}_${revision}
- nvidia-beta-firmware-${version}_${revision}"
+subpackages="nvidia-new-feature-gtklibs nvidia-new-feature-dkms nvidia-new-feature-firmware nvidia-new-feature-opencl nvidia-new-feature-libs nvidia-new-feature-libs-32bit"
+depends="nvidia-new-feature-libs-${version}_${revision}
+ nvidia-new-feature-gtklibs-${version}_${revision}
+ nvidia-new-feature-dkms-${version}_${revision}
+ nvidia-new-feature-firmware-${version}_${revision}"
 
 _install_libs() {
 	local libdir=$1
@@ -290,7 +290,7 @@ do_install() {
 	_install_libs usr/lib32
 }
 
-nvidia-beta-gtklibs_package() {
+nvidia-new-feature-gtklibs_package() {
 	short_desc="${_desc} - GTK+ libraries"
 	conflicts="nvidia470-gtklibs>=0 nvidia390-gtklibs>=0 nvidia-gtklibs>=0"
 	pkg_install() {
@@ -298,7 +298,7 @@ nvidia-beta-gtklibs_package() {
 	}
 }
 
-nvidia-beta-libs-32bit_package() {
+nvidia-new-feature-libs-32bit_package() {
 	short_desc="${_desc} - common libraries (32bit)"
 	# manually set 32bit depends for libglvnd
 	depends="glibc-32bit>=0 libX11-32bit>=0 libXext-32bit>=0 libglvnd-32bit>=0"
@@ -309,7 +309,7 @@ nvidia-beta-libs-32bit_package() {
 	}
 }
 
-nvidia-beta-libs_package() {
+nvidia-new-feature-libs_package() {
 	short_desc="${_desc} - common libraries"
 	depends="libglvnd"
 	nostrip_files="gsp.bin"
@@ -319,7 +319,7 @@ nvidia-beta-libs_package() {
 	}
 }
 
-nvidia-beta-dkms_package() {
+nvidia-new-feature-dkms_package() {
 	short_desc="${_desc} - DKMS kernel module"
 	depends="dkms xbps-triggers>=0.121_1"
 	dkms_modules="nvidia ${version}"
@@ -333,7 +333,7 @@ nvidia-beta-dkms_package() {
 	}
 }
 
-nvidia-beta-opencl_package() {
+nvidia-new-feature-opencl_package() {
 	short_desc="${_desc} - OpenCL implementation"
 	depends="ocl-icd"
 	conflicts="nvidia470-opencl>=0 nvidia390-opencl>=0 nvidia-opencl>=0"
@@ -343,7 +343,7 @@ nvidia-beta-opencl_package() {
 	}
 }
 
-nvidia-beta-firmware_package() {
+nvidia-new-feature-firmware_package() {
 	short_desc="${_desc} - Firmware"
 	conflicts="nvidia-firmware>=0"
 	pkg_install() {
